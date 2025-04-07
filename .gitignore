@@ -1,0 +1,83 @@
+# Xcode
+#
+# gitignore file for Xcode projects
+#
+# Based on GitHub's Swift.gitignore
+
+## User settings
+xcuserdata/
+*.xcuserstate
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+.build/
+.swiftpm/
+
+# CocoaPods
+#
+# We recommend checking the Pods directory into your repository
+# unless you're using a system like fastlane to handle dependency management
+Pods/
+#
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+*.xcworkspace
+
+# Carthage
+#
+Carthage/Build/
+
+# fastlane
+#
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+#
+iOSInjectionProject/
+
+# Mac OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build products
+DerivedData/
+build/
+
+# Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
