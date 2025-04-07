@@ -1,7 +1,7 @@
 # TikTik - Task Management App
 
 <p align="center">
-  <img src="https://github.com/pripoliveira50/pripoliveira50/blob/main/.github/assets/icone.png" alt="TikTik Logo" width="150"/>
+  <img src=".github/assets/icone.png" alt="TikTik Logo" width="150"/>
 </p>
 
 
