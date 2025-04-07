@@ -1,7 +1,7 @@
 # TikTik - Task Management App
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/username/TikTik/main/TikTik/Assets/AppIcon.png" alt="TikTik Logo" width="150"/>
+  <img src="https://raw.githubusercontent.com/pripoliveira50/TikTik/main/TikTik/Assets/AppIcon.png" alt="TikTik Logo" width="150"/>
 </p>
 
 TikTik is a simple, intuitive yet powerful task management application built for iOS devices. Designed with modern SwiftUI principles, it provides users with an elegant interface to create, organize, and track daily tasks efficiently. With features like priority-based organization, task completion tracking, and persistent storage, TikTik helps users stay productive and focused.
