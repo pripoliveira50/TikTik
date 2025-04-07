@@ -46,7 +46,7 @@ struct EmptyStateView: View {
     
     private var addTaskButton: some View {
         NavigationLink(destination: TaskAddView()) {
-            Text("Add First Task 🚀")
+            Text("Add First Task ✨")
                 .foregroundStyle(.white)
                 .font(.headline)
                 .frame(height: 55)

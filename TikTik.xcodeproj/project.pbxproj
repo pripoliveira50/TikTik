@@ -16,6 +16,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		277F786F2DA41DE9004555CF /* UIResources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UIResources;
+			sourceTree = "<group>";
+		};
 		27D4CFD32DA3F1A4004E8C7A /* TikTik */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TikTik;
@@ -37,6 +42,7 @@
 		27D4CFC82DA3F1A4004E8C7A = {
 			isa = PBXGroup;
 			children = (
+				277F786F2DA41DE9004555CF /* UIResources */,
 				277F786D2DA41C59004555CF /* README.md */,
 				27D4CFD32DA3F1A4004E8C7A /* TikTik */,
 				27D4CFD22DA3F1A4004E8C7A /* Products */,
@@ -67,6 +73,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				277F786F2DA41DE9004555CF /* UIResources */,
 				27D4CFD32DA3F1A4004E8C7A /* TikTik */,
 			);
 			name = TikTik;
