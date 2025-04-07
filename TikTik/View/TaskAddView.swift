@@ -15,6 +15,7 @@ struct TaskAddView: View {
     @EnvironmentObject private var viewModel: TaskListViewModel
     
     @State private var taskTitle = ""
+    @State private var selectedPriority: TaskPriority? = nil
     @State private var showValidationAlert = false
     @State private var validationMessage = ""
     
@@ -24,17 +25,28 @@ struct TaskAddView: View {
         taskTitle.count >= 3
     }
     
+    private var isPrioritySelected: Bool {
+        selectedPriority != nil
+    }
+    
     // MARK: - Body
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(alignment: .leading, spacing: 20) {
+                subtitleSection
+                
                 taskTitleField
+                
+                PrioritySelectionView(selectedPriority: $selectedPriority)
+                
                 saveButton
             }
-            .padding(14)
+            .padding(.horizontal, 16)
+            .padding(.top, 0)
         }
-        .navigationTitle("Add a Task 🖊️")
+        .navigationTitle("Add Task")
+        .background(Color(UIColor.systemGroupedBackground))
         .alert(isPresented: $showValidationAlert) {
             Alert(title: Text(validationMessage))
         }
@@ -42,36 +54,61 @@ struct TaskAddView: View {
     
     // MARK: - Private Views
     
+    private var subtitleSection: some View {
+        Text("Fill in the details below")
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
+            .padding(.top, 4)
+            .padding(.bottom, 8)
+    }
+    
     private var taskTitleField: some View {
-        TextField("Type task description here...", text: $taskTitle)
-            .padding(.horizontal)
-            .frame(height: 55)
-            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(10)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Task Title")
+                .font(.headline)
+            
+            TextField("Ex: Buy milk", text: $taskTitle)
+                .padding()
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
+        }
     }
     
     private var saveButton: some View {
         Button(action: attemptToSaveTask) {
-            Text("Save".uppercased())
+            Text("Save Task")
+                .fontWeight(.semibold)
                 .foregroundStyle(.white)
-                .font(.headline)
                 .frame(height: 55)
                 .frame(maxWidth: .infinity)
                 .background(Color.accentColor)
                 .cornerRadius(10)
+                .padding(.top, 16)
         }
     }
     
     // MARK: - Private Methods
     
     private func attemptToSaveTask() {
-        if isTaskTitleValid {
-            viewModel.addTask(withTitle: taskTitle)
-            dismiss()
-        } else {
-            validationMessage = "Your task must be at least 3 characters long!"
+        if !isTaskTitleValid {
+            validationMessage = "Your task must have at least 3 characters!"
             showValidationAlert = true
+            return
         }
+        
+        if !isPrioritySelected {
+            validationMessage = "Please select a priority for your task!"
+            showValidationAlert = true
+            return
+        }
+        
+        // If we got here, both validations passed
+        viewModel.addTask(withTitle: taskTitle, priority: selectedPriority!)
+        dismiss()
     }
 }
 

@@ -33,10 +33,12 @@ class TaskListViewModel: ObservableObject {
         }
     }
     
-    /// Adds a new task with the given title
-    /// - Parameter title: The title of the task to add
-    func addTask(withTitle title: String) {
-        let newTask = Task(title: title, isCompleted: false)
+    /// Adds a new task with the given title and priority
+    /// - Parameters:
+    ///   - title: The title of the task to add
+    ///   - priority: The priority level of the task
+    func addTask(withTitle title: String, priority: TaskPriority) {
+        let newTask = Task(title: title, priority: priority)
         tasks.append(newTask)
     }
     
@@ -45,6 +47,16 @@ class TaskListViewModel: ObservableObject {
     func toggleTaskCompletion(task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
             tasks[index] = task.toggleCompletion()
+        }
+    }
+    
+    /// Updates the priority of a task
+    /// - Parameters:
+    ///   - task: The task to update
+    ///   - priority: The new priority to set
+    func updateTaskPriority(task: Task, priority: TaskPriority) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index] = task.updatePriority(priority)
         }
     }
     

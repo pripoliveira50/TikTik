@@ -14,10 +14,21 @@ struct TaskRowView: View {
     var body: some View {
         HStack {
             statusIcon
-            taskTitle
+            
+            Text(task.title)
+                .font(.title3)
+            
             Spacer()
+            
+            HStack(spacing: 4) {
+                Image(systemName: task.priority.icon)
+                    .foregroundStyle(task.priority.color)
+                
+                Text(task.priority.name)
+                    .font(.caption)
+                    .foregroundStyle(task.priority.color)
+            }
         }
-        .font(.title2)
         .padding(.vertical, 8)
     }
     
@@ -26,15 +37,13 @@ struct TaskRowView: View {
     private var statusIcon: some View {
         Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
             .foregroundStyle(task.isCompleted ? .green : .yellow)
-    }
-    
-    private var taskTitle: some View {
-        Text(task.title)
+            .font(.title2)
+            .padding(.trailing, 8)
     }
 }
 
 // MARK: - Preview
 #Preview {
-    let sampleTask = Task(title: "Complete refactoring", isCompleted: false)
+    let sampleTask = Task(title: "Complete refactoring", priority: .high)
     return TaskRowView(task: sampleTask)
 }

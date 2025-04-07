@@ -10,6 +10,36 @@ import SwiftUI
 struct TaskListView: View {
     
     @EnvironmentObject private var viewModel: TaskListViewModel
+    @State private var sortByPriority = true
+    
+    var pendingTasks: [Task] {
+        let filtered = viewModel.tasks.filter { !$0.isCompleted }
+        if sortByPriority {
+            return filtered.sorted { priorityValue($0.priority) > priorityValue($1.priority) }
+        } else {
+            return filtered
+        }
+    }
+    
+    var completedTasks: [Task] {
+        let filtered = viewModel.tasks.filter { $0.isCompleted }
+        if sortByPriority {
+            return filtered.sorted { priorityValue($0.priority) > priorityValue($1.priority) }
+        } else {
+            return filtered
+        }
+    }
+    
+    private func priorityValue(_ priority: TaskPriority) -> Int {
+        switch priority {
+        case .high:
+            return 3
+        case .medium:
+            return 2
+        case .low:
+            return 1
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -26,6 +56,18 @@ struct TaskListView: View {
                 EditButton()
                     .disabled(viewModel.hasNoTasks())
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    withAnimation {
+                        sortByPriority.toggle()
+                    }
+                }) {
+                    Label("", systemImage: "arrow.up.arrow.down")
+                }
+                .disabled(viewModel.hasNoTasks())
+            }
+            
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink("Add", destination: TaskAddView())
             }
@@ -36,18 +78,49 @@ struct TaskListView: View {
     
     private var taskListContent: some View {
         List {
-            ForEach(viewModel.tasks) { task in
-                TaskRowView(task: task)
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.toggleTaskCompletion(task: task)
-                        }
+            if !pendingTasks.isEmpty {
+                Section(header: Text("Pending")) {
+                    ForEach(pendingTasks) { task in
+                        TaskRowView(task: task)
+                            .onTapGesture {
+                                withAnimation {
+                                    viewModel.toggleTaskCompletion(task: task)
+                                }
+                            }
                     }
+                    .onDelete { indexSet in
+                        deleteTask(at: indexSet, from: pendingTasks)
+                    }
+                }
             }
-            .onDelete(perform: viewModel.deleteTask)
-            .onMove(perform: viewModel.moveTask)
+            
+            if !completedTasks.isEmpty {
+                Section(header: Text("Completed")) {
+                    ForEach(completedTasks) { task in
+                        TaskRowView(task: task)
+                            .onTapGesture {
+                                withAnimation {
+                                    viewModel.toggleTaskCompletion(task: task)
+                                }
+                            }
+                    }
+                    .onDelete { indexSet in
+                        deleteTask(at: indexSet, from: completedTasks)
+                    }
+                }
+            }
         }
-        .listStyle(.plain)
+        .listStyle(.insetGrouped)
+    }
+    
+    private func deleteTask(at indexSet: IndexSet, from tasks: [Task]) {
+        let idsToDelete = indexSet.map { tasks[$0].id }
+        
+        let indexesToDelete = viewModel.tasks.indices.filter { index in
+            idsToDelete.contains(viewModel.tasks[index].id)
+        }
+        
+        viewModel.deleteTask(at: IndexSet(indexesToDelete))
     }
 }
 
