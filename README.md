@@ -33,7 +33,7 @@ TikTik is a simple, intuitive, yet powerful task management application built fo
 ## 📱 Screenshots
 
 <p align="center">
-  <img src=".github/assets/AppGif.png" alt="TikTik Logo" width="350"/>
+  <img src=".github/assets/appGif.gif" alt="Gif App" width="350"/>
 </p>
 
 ## 🛠️ Technologies Used
