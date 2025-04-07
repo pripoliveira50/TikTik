@@ -192,6 +192,4 @@ TikTik features a clean, focused interface designed with these principles in min
 
 ---
 
-<p align="center">
   Made with ❤️ by [Priscila Oliveira](https://github.com/pripoliveira50/)
-</p>
