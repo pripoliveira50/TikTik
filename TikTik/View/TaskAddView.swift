@@ -106,7 +106,6 @@ struct TaskAddView: View {
             return
         }
         
-        // If we got here, both validations passed
         viewModel.addTask(withTitle: taskTitle, priority: selectedPriority!)
         dismiss()
     }

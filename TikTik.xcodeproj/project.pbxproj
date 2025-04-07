@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		277F786E2DA41C59004555CF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 277F786D2DA41C59004555CF /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		277F786D2DA41C59004555CF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		27D4CFD12DA3F1A4004E8C7A /* TikTik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TikTik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,6 +37,7 @@
 		27D4CFC82DA3F1A4004E8C7A = {
 			isa = PBXGroup;
 			children = (
+				277F786D2DA41C59004555CF /* README.md */,
 				27D4CFD32DA3F1A4004E8C7A /* TikTik */,
 				27D4CFD22DA3F1A4004E8C7A /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				277F786E2DA41C59004555CF /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
